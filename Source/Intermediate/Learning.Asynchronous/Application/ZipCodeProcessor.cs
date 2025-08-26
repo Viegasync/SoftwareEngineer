@@ -1,9 +1,10 @@
 ﻿namespace Learning.Asynchronous.Application;
 
 /// <summary>
-/// Representa o ponto de entrada da aplicação.
+/// Representa o ponto 
+/// de entrada da aplicação.
 /// </summary>
-internal sealed class ZipCodeProcessor
+internal static class ZipCodeProcessor
 {
     /// <summary>
     /// Processa os CEPs fornecidos.
@@ -42,7 +43,7 @@ internal sealed class ZipCodeProcessor
     }
 
     /// <summary>
-    /// Exibe as propriedades não nulas do endereço.
+    /// Exibe as propriedades não nulas.
     /// </summary>
     private static void DisplayAddressData(AddressResponse? address, Action<string> console)
     {
