@@ -18,14 +18,12 @@ internal static class Benchmark
     /// <summary>
     /// Para o cronômetro interno.
     /// </summary>
-    /// <exception cref="InvalidOperationException"></exception>
     internal static void Stop() => s_stopwatch?.Stop();
 
     /// <summary>
     /// Exibe o tempo decorrido em segundos 
     /// desde que o cronômetro foi iniciado.
     /// </summary>
-    /// <exception cref="InvalidOperationException"></exception>
     internal static void DisplayElapsedTime()
     {
         Console.Write($"\nTime: {s_stopwatch?.Elapsed.TotalSeconds:F2}");

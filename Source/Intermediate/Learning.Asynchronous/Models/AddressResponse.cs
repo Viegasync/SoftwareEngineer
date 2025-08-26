@@ -1,4 +1,4 @@
-﻿namespace Learning.Asynchronous.Mappings;
+﻿namespace Learning.Asynchronous.Models;
 
 /// <summary>
 /// Representa um endereço 

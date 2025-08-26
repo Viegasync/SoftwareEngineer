@@ -8,6 +8,7 @@ internal sealed class ZipCodeProcessor
     /// <summary>
     /// Processa os CEPs fornecidos.
     /// </summary>
+    /// <exception cref="FormatException"></exception>
     /// <exception cref="HttpRequestException"></exception>
     internal static async Task RunAsync(string[] zipCodes, CancellationToken token = default)
     {

@@ -9,6 +9,7 @@ internal sealed class ViaCEPService(HttpClient http) : IDisposable
     /// Realiza uma chamada assíncrona à API e, 
     /// conforme o CEP informado, obtém os dados.
     /// </summary>
+    /// <exception cref="FormatException"></exception>
     /// <exception cref="HttpRequestException"></exception>
     internal async Task<AddressResponse?> GetAddressAsync(string zipCode, CancellationToken token = default)
     {
