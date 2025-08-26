@@ -1,1 +1,1 @@
-﻿Console.WriteLine("Hello World!");
+﻿await ZipCodeProcessor.RunAsync(["01001-000", "90010-000", "S305-071H", "00000-000"]);
