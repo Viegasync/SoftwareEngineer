@@ -53,6 +53,7 @@ internal static class ZipCodeProcessor
         foreach (PropertyInfo property in properties)
         {
             object? currentValue = property.GetValue(source);
+
             if (currentValue is string value && !string.IsNullOrWhiteSpace(value))
                 Console.WriteLine($"{property.Name}: {currentValue}");
         }

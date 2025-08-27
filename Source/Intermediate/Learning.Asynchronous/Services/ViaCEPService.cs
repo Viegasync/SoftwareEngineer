@@ -14,6 +14,7 @@ internal sealed class ViaCEPService(HttpClient http) : IDisposable
     internal async Task<AddressResponse?> GetAddressAsync(string zipCode, CancellationToken token = default)
     {
         ValidateZipCode(zipCode);
+
         HttpResponseMessage response = await http
             .GetAsync($"https://viacep.com.br/ws/{zipCode}/json/", token);
 
