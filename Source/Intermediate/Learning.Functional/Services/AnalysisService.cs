@@ -21,15 +21,15 @@ internal static class AnalysisService
     /// Retorna os alunos 
     /// aprovados (média >= 7).
     /// </summary>
-    internal static IEnumerable<StudentRequest> GetApproved(IEnumerable<StudentRequest> students)
-        => students.Where(s => s.Grades.Average(g => g.Value) >= 7);
+    internal static IEnumerable<StudentRequest> GetApproved(IEnumerable<StudentRequest> students, decimal average)
+        => students.Where(s => s.Grades.Average(grade => grade.Value) >= average);
 
     /// <summary>
     /// Retorna os alunos 
     /// reprovados (média < 7).
     /// </summary>
-    internal static IEnumerable<StudentRequest> GetDisapproved(IEnumerable<StudentRequest> students)
-        => students.Where(s => s.Grades.Average(g => g.Value) < 7);
+    internal static IEnumerable<StudentRequest> GetDisapproved(IEnumerable<StudentRequest> students, decimal average)
+        => students.Where(s => s.Grades.Average(grade => grade.Value) < average);
 
     /// <summary>
     /// Retorna o aluno com a 
@@ -51,8 +51,8 @@ internal static class AnalysisService
             .Select(value => new StudentResponse
             {
                 Subject = value.Key,
-                Average = value.Average(g => g.Value),
-                Highest = value.Max(g => g.Value),
-                Lowest = value.Min(g => g.Value)
+                Average = value.Average(grade => grade.Value),
+                Highest = value.Max(grade => grade.Value),
+                Lowest = value.Min(grade => grade.Value)
             });
 }

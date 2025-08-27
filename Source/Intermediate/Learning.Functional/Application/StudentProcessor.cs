@@ -44,7 +44,7 @@ internal static class StudentProcessor
         Console.WriteLine("\n***** Approved *****\n");
 
         IEnumerable<StudentRequest> approved = AnalysisService
-            .GetApproved(students);
+            .GetApproved(students, 7.0m);
 
         foreach (StudentRequest student in approved)
             DisplayPropertyValue(student);
@@ -58,7 +58,7 @@ internal static class StudentProcessor
         Console.WriteLine("\n***** Disapproved *****\n");
 
         IEnumerable<StudentRequest> approved = AnalysisService
-            .GetDisapproved(students);
+            .GetDisapproved(students, 7.0m);
 
         foreach (StudentRequest student in approved)
             DisplayPropertyValue(student);
