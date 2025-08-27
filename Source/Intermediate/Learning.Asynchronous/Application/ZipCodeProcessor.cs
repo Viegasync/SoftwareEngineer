@@ -46,7 +46,7 @@ internal static class ZipCodeProcessor
     /// Exibe o valor das 
     /// propriedades não nulas.
     /// </summary>
-    private static void DisplayPropertyValue<TSource>(TSource? source)
+    private static void DisplayPropertyValue<TSource>(TSource source)
     {
         PropertyInfo[] properties = typeof(TSource)
             .GetProperties();
