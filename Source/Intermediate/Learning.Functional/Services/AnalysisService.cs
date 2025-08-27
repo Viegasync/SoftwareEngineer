@@ -17,7 +17,7 @@ internal static class AnalysisService
             Average = student.Grades.Average(grade => grade.Value)
         });
 
-    //// <summary>
+    /// <summary>
     /// Retorna os alunos 
     /// aprovados (média >= 7).
     /// </summary>
