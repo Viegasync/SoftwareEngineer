@@ -14,7 +14,6 @@ internal static class ZipCodeProcessor
     internal static async Task RunAsync(string[] zipCodes, CancellationToken token = default)
     {
         Benchmark.Start();
-
         ConcurrentBag<string> errors = [];
         using ViaCEPService service = new(new HttpClient());
 
