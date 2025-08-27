@@ -1,1 +1,1 @@
-﻿Console.WriteLine("Hello World!");
+﻿StudentProcessor.Run();
