@@ -33,7 +33,7 @@ internal static class ZipCodeProcessor
             .Where(address => address is not null)];
 
         foreach (AddressResponse? address in addresses)
-            DisplayAddressData(address, Console.WriteLine);
+            DisplayAddressData(address);
 
         foreach (string error in errors)
             Console.WriteLine(error);
@@ -45,7 +45,7 @@ internal static class ZipCodeProcessor
     /// <summary>
     /// Exibe as propriedades não nulas.
     /// </summary>
-    private static void DisplayAddressData(AddressResponse? address, Action<string> console)
+    private static void DisplayAddressData(AddressResponse? address)
     {
         PropertyInfo[] properties = typeof(AddressResponse)
             .GetProperties();
@@ -54,7 +54,7 @@ internal static class ZipCodeProcessor
         {
             object? currentValue = property.GetValue(address);
             if (currentValue is string value && !string.IsNullOrWhiteSpace(value))
-                console($"{property.Name}: {currentValue}");
+                Console.WriteLine($"{property.Name}: {currentValue}");
         }
 
         Console.WriteLine();
