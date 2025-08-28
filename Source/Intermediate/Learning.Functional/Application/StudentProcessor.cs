@@ -16,6 +16,7 @@ internal static class StudentProcessor
         DisplayStudentApproved(students);
         DisplayStudentDisapproved(students);
         DisplayBySubject(students);
+        DisplayFailingSubject(students);
         DisplayStudentByMaxAverage(students);
         DisplayStudentByMinAverage(students);
         Console.ReadKey();
@@ -25,107 +26,67 @@ internal static class StudentProcessor
     /// Exibe o valor da
     /// média de cada aluno.
     /// </summary>
-    private static void DisplayStudentAverages(IEnumerable<StudentRequest> students)
-    {
-        Console.WriteLine("***** Averages *****\n");
-
-        IEnumerable<StudentResponse> averages = AnalysisService
-            .CalculateAverage(students);
-
-        foreach (StudentResponse student in averages)
-            DisplayPropertyValue(student);
-    }
+    private static void DisplayStudentAverages(IEnumerable<StudentRequest> students) =>
+        AnalysisService
+            .CalculateAverage(students)
+            .DisplayHeader("Averages")
+            .DisplayProperties();
 
     /// <summary>
     /// Exibe os alunos aprovados.
     /// </summary>
-    private static void DisplayStudentApproved(IEnumerable<StudentRequest> students)
-    {
-        Console.WriteLine("\n***** Approved *****\n");
-
-        IEnumerable<StudentRequest> approved = AnalysisService
-            .GetApproved(students, 7.0m);
-
-        foreach (StudentRequest student in approved)
-            DisplayPropertyValue(student);
-    }
+    private static void DisplayStudentApproved(IEnumerable<StudentRequest> students) =>
+        AnalysisService
+            .GetApproved(students)
+            .DisplayHeader("Approved")
+            .DisplayProperties();
 
     /// <summary>
     /// Exibe os alunos reprovados.
     /// </summary>
-    private static void DisplayStudentDisapproved(IEnumerable<StudentRequest> students)
-    {
-        Console.WriteLine("\n***** Disapproved *****\n");
-
-        IEnumerable<StudentRequest> approved = AnalysisService
-            .GetDisapproved(students, 7.0m);
-
-        foreach (StudentRequest student in approved)
-            DisplayPropertyValue(student);
-    }
+    private static void DisplayStudentDisapproved(IEnumerable<StudentRequest> students) =>
+        AnalysisService
+            .GetDisapproved(students)
+            .DisplayHeader("Disapproved")
+            .DisplayProperties();
 
     /// <summary>
     /// Exibe a estastiticas por disciplinas.
     /// </summary>
-    private static void DisplayBySubject(IEnumerable<StudentRequest> students)
-    {
-        Console.WriteLine("\n***** By Subject *****\n");
+    private static void DisplayBySubject(IEnumerable<StudentRequest> students) =>
+        AnalysisService
+            .GroupBySubject(students)
+            .DisplayHeader("Grades by Subject")
+            .DisplayProperties();
 
-        IEnumerable<StudentResponse> subjects = AnalysisService
-            .GroupBySubject(students);
-
-        foreach (StudentResponse student in subjects)
-            DisplayPropertyValue(student);
-    }
+    /// <summary>
+    /// Exibe as disciplinas abaixo da média.
+    /// </summary>
+    private static void DisplayFailingSubject(IEnumerable<StudentRequest> students) =>
+        AnalysisService
+            .GetFailingSubjects(students)
+            .DisplayHeader("Failing Subject")
+            .DisplayProperties();
 
     /// <summary>
     /// Exibe os alunos 
     /// com a maior média.
     /// </summary>
-    private static void DisplayStudentByMaxAverage(IEnumerable<StudentRequest> students)
-    {
-        Console.WriteLine("\n***** Average (Max) *****\n");
-
-        StudentRequest? average = AnalysisService
-            .FindStudentByAverage(students);
-
-        DisplayPropertyValue(average);
-    }
+    private static void DisplayStudentByMaxAverage(IEnumerable<StudentRequest> students) =>
+        AnalysisService
+            .FindStudentByAverage(students)
+            .AsEnumerable()
+            .DisplayHeader("Average (max)")
+            .DisplayProperties();
 
     /// <summary>
     /// Exibe os alunos 
     /// com a menor média.
     /// </summary>
-    private static void DisplayStudentByMinAverage(IEnumerable<StudentRequest> students)
-    {
-        Console.WriteLine("\n***** Average (Min) *****\n");
-
-        StudentRequest? average = AnalysisService
-            .FindStudentByAverage(students, false);
-
-        DisplayPropertyValue(average);
-    }
-
-    /// <summary>
-    /// Exibe o valor das 
-    /// propriedades não nulas.
-    /// </summary>
-    private static void DisplayPropertyValue<TSource>(TSource source)
-    {
-        PropertyInfo[] properties = typeof(TSource)
-            .GetProperties(BindingFlags.Instance | BindingFlags.NonPublic);
-
-        foreach (PropertyInfo property in properties)
-        {
-            object? currentValue = property.GetValue(source);
-
-            if (currentValue is string value && !string.IsNullOrWhiteSpace(value))
-                Console.WriteLine($"{property.Name}: {value}");
-
-            if (currentValue is decimal number)
-                Console.WriteLine($"{property.Name}: {number:F2}");
-        }
-
-        Console.WriteLine();
-    }
+    private static void DisplayStudentByMinAverage(IEnumerable<StudentRequest> students) =>
+        AnalysisService
+            .FindStudentByAverage(students, false)
+            .AsEnumerable()
+            .DisplayHeader("Average (min)")
+            .DisplayProperties();
 }
