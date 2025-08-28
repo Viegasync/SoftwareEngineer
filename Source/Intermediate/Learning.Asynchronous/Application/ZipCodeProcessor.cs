@@ -29,36 +29,13 @@ internal static class ZipCodeProcessor
                     }
                 }));
 
-        AddressResponse?[] addresses = [.. responses
-            .Where(address => address is not null)];
+        responses
+            .Where(address => address is not null)
+            .DisplayProperties();
 
-        foreach (AddressResponse? address in addresses)
-            DisplayPropertyValue(address);
-
-        foreach (string error in errors)
-            Console.WriteLine(error);
+        errors.DisplayErrors();
 
         Benchmark.Stop();
         Benchmark.DisplayElapsedTime();
-    }
-
-    /// <summary>
-    /// Exibe o valor das 
-    /// propriedades não nulas.
-    /// </summary>
-    private static void DisplayPropertyValue<TSource>(TSource source)
-    {
-        PropertyInfo[] properties = typeof(TSource)
-            .GetProperties();
-
-        foreach (PropertyInfo property in properties)
-        {
-            object? currentValue = property.GetValue(source);
-
-            if (currentValue is string value && !string.IsNullOrWhiteSpace(value))
-                Console.WriteLine($"{property.Name}: {currentValue}");
-        }
-
-        Console.WriteLine();
     }
 }
