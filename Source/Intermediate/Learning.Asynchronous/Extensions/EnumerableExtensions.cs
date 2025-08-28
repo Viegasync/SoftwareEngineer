@@ -28,6 +28,16 @@ internal static class EnumerableExtensions
     }
 
     /// <summary>
+    /// Imprime uma mensagem no console 
+    /// caso a coleção esteja vazia.
+    /// </summary>
+    private static void DisplayIfEmpty<TSource>(IEnumerable<TSource> source, string message = "Empty")
+    {
+        if (!source.Any())
+            Console.WriteLine(message);
+    }
+
+    /// <summary>
     /// Retorna o valor de todas
     /// as propriedades não nulas.
     /// </summary>
@@ -52,15 +62,5 @@ internal static class EnumerableExtensions
         }
 
         return builder;
-    }
-
-    /// <summary>
-    /// Imprime uma mensagem no console 
-    /// caso a coleção esteja vazia.
-    /// </summary>
-    private static void DisplayIfEmpty<TSource>(IEnumerable<TSource> source, string message = "Empty")
-    {
-        if (!source.Any())
-            Console.WriteLine(message);
     }
 }
