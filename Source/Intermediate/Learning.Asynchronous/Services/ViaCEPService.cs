@@ -16,10 +16,12 @@ internal sealed class ViaCEPService(HttpClient http) : IDisposable
         ValidateZipCode(zipCode);
 
         HttpResponseMessage response = await http
-            .GetAsync($"https://viacep.com.br/ws/{zipCode}/json/", token);
+            .GetAsync($"https://viacep.com.br/ws/{zipCode}/json/", token)
+            .ConfigureAwait(false);
 
         AddressResponse? address = await response.Content
-            .ReadFromJsonAsync<AddressResponse>(token);
+            .ReadFromJsonAsync<AddressResponse>(token)
+            .ConfigureAwait(false);
 
         return !response.IsSuccessStatusCode || address?.Error == "true"
             ? throw new HttpRequestException("Address not found.")
