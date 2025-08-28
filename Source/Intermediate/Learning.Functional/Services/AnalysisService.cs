@@ -27,22 +27,14 @@ internal static class AnalysisService
     /// aprovados (média >= 7).
     /// </summary>
     internal static IEnumerable<StudentRequest> GetApproved(IEnumerable<StudentRequest> students) =>
-        students.Where(student =>
-        {
-            decimal average = CalculateAverage(student);
-            return average >= s_passingGrade;
-        });
+        students.Where(student => CalculateAverage(student) >= s_passingGrade);
 
     /// <summary>
     /// Retorna os alunos 
     /// reprovados (média < 7).
     /// </summary>
     internal static IEnumerable<StudentRequest> GetDisapproved(IEnumerable<StudentRequest> students) =>
-        students.Where(student =>
-        {
-            decimal average = CalculateAverage(student);
-            return average < s_passingGrade;
-        });
+        students.Where(student => CalculateAverage(student) < s_passingGrade);
 
     /// <summary>
     /// Retorna o aluno com a 
