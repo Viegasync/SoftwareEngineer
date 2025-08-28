@@ -13,14 +13,14 @@ internal static class Benchmark
     /// <summary>
     /// Inicia o cronômetro interno.
     /// </summary>
-    internal static void Start()
-        => s_stopwatch = Stopwatch.StartNew();
+    internal static void Start() =>
+        s_stopwatch = Stopwatch.StartNew();
 
     /// <summary>
     /// Para o cronômetro interno.
     /// </summary>
-    internal static void Stop()
-        => s_stopwatch?.Stop();
+    internal static void Stop() =>
+        s_stopwatch?.Stop();
 
     /// <summary>
     /// Exibe o tempo decorrido em segundos 

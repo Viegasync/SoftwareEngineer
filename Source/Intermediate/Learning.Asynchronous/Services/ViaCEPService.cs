@@ -47,5 +47,6 @@ internal sealed class ViaCEPService(HttpClient http) : IDisposable
     /// Libera os recursos utilizados
     /// pelo <see cref="HttpClient"/> interno.
     /// </summary>
-    public void Dispose() => http.Dispose();
+    public void Dispose() =>
+        http.Dispose();
 }

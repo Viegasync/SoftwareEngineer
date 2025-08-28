@@ -18,15 +18,16 @@ internal static class ZipCodeProcessor
         using ViaCEPService service = new(new HttpClient());
 
         AddressResponse?[] responses = await Task
-            .WhenAll(zipCodes.Select(async zipCode =>
-            {
-                try { return await service.GetAddressAsync(zipCode, token); }
-                catch (Exception ex)
+            .WhenAll(zipCodes
+                .Select(async zipCode =>
                 {
-                    errors.Add($"Error: {ex.Message}");
-                    return null;
-                }
-            }));
+                    try { return await service.GetAddressAsync(zipCode, token); }
+                    catch (Exception ex)
+                    {
+                        errors.Add($"Error: {ex.Message}");
+                        return null;
+                    }
+                }));
 
         AddressResponse?[] addresses = [.. responses
             .Where(address => address is not null)];
