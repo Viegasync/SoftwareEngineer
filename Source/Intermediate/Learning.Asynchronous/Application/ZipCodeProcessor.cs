@@ -1,8 +1,8 @@
 ﻿namespace Learning.Asynchronous.Application;
 
 /// <summary>
-/// Representa o ponto 
-/// de entrada da aplicação.
+/// Classe estática que representa
+/// o ponto de entrada da aplicação.
 /// </summary>
 internal static class ZipCodeProcessor
 {

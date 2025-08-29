@@ -1,7 +1,8 @@
 ﻿namespace Learning.Asynchronous.Extensions;
 
 /// <summary>
-/// Método extensivo.
+/// Classe estática que contém métodos de 
+/// extensão para <see cref="IEnumerable{T}"/>.
 /// </summary>
 internal static class EnumerableExtensions
 {

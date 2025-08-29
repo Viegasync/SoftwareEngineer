@@ -1,7 +1,8 @@
 ﻿namespace Learning.Asynchronous.Application;
 
 /// <summary>
-/// Permite medir o tempo de execução.
+/// Classe estática para medir o tempo de execução 
+/// de operações, baseada em <see cref="Stopwatch"/>.
 /// </summary>
 internal static class Benchmark
 {
