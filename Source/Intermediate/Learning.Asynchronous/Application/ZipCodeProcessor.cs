@@ -24,16 +24,13 @@ internal static class ZipCodeProcessor
                     try { return await service.GetAddressAsync(zipCode, token); }
                     catch (Exception ex)
                     {
-                        errors.Add($"Error: {ex.Message}");
+                        errors.Add($"Errors: {ex.Message}");
                         return null;
                     }
                 }));
 
-        responses
-            .Where(address => address is not null)
-            .DisplayProperties();
-
         errors.DisplayErrors();
+        responses.DisplayProperties();
 
         Benchmark.Stop();
         Benchmark.DisplayElapsedTime();
