@@ -50,12 +50,10 @@ internal static class EnumerableExtensions
             .GetProperties()
             .Where(property =>
                 property.GetIndexParameters().Length == 0)
-            ];
+        ];
 
         foreach (PropertyInfo property in properties)
         {
-            if (item is null) continue;
-
             object? currentValue = property.GetValue(item);
 
             if (currentValue is string value && !string.IsNullOrWhiteSpace(value))
