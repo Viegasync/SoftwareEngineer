@@ -29,8 +29,11 @@ internal static class ZipCodeProcessor
                     }
                 }));
 
+        responses
+            .Where(address => address is not null)
+            .DisplayProperties();
+
         errors.DisplayErrors();
-        responses.DisplayProperties();
 
         Benchmark.Stop();
         Benchmark.DisplayElapsedTime();
