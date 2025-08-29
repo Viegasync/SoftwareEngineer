@@ -35,12 +35,12 @@ internal sealed class ViaCEPService(HttpClient http) : IDisposable
     /// <exception cref="FormatException"></exception>
     private static string ValidateZipCode(string zipCode)
     {
-        string zipCodeFormatted = new([.. zipCode
+        string formatted = new([.. zipCode
             .Where(char.IsDigit)]);
 
-        return zipCodeFormatted.Length != 8
+        return formatted.Length != 8
             ? throw new FormatException("ZipCode is invalid.")
-            : zipCodeFormatted;
+            : formatted;
     }
 
     /// <summary>
