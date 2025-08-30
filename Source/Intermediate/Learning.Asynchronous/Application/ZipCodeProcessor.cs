@@ -20,7 +20,7 @@ internal static class ZipCodeProcessor
 
         AddressResponse[] responses = await Task
             .WhenAll(zipCodes
-                .Where(zipCode => zipCode is not null)
+                .Where(zipCode => !string.IsNullOrWhiteSpace(zipCode))
                 .Select(async zipCode =>
                 {
                     try { return await service.GetAddressAsync(zipCode, token); }
