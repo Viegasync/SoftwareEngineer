@@ -10,6 +10,7 @@ internal static class ZipCodeProcessor
     /// Processa os CEPs fornecidos.
     /// </summary>
     /// <exception cref="FormatException"></exception>
+    /// <exception cref="ArgumentException"></exception>
     /// <exception cref="HttpRequestException"></exception>
     internal static async Task RunAsync(string[] zipCodes, CancellationToken token = default)
     {
@@ -17,8 +18,9 @@ internal static class ZipCodeProcessor
         ConcurrentBag<string> errors = [];
         using ViaCEPService service = new(new HttpClient());
 
-        AddressResponse?[] responses = await Task
+        AddressResponse[] responses = await Task
             .WhenAll(zipCodes
+                .Where(zipCode => zipCode is not null)
                 .Select(async zipCode =>
                 {
                     try { return await service.GetAddressAsync(zipCode, token); }
