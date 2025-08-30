@@ -13,7 +13,7 @@ internal static class EnumerableExtensions
     internal static void DisplayErrors<TSource>(this IEnumerable<TSource> source)
     {
         DisplayIfEmpty(source, "No errors.");
-        foreach (TSource? item in source)
+        foreach (TSource item in source)
             Console.WriteLine(item);
     }
 
@@ -23,7 +23,7 @@ internal static class EnumerableExtensions
     /// </summary>
     internal static void DisplayProperties<TSource>(this IEnumerable<TSource> source)
     {
-        DisplayIfEmpty(source);
+        DisplayIfEmpty(source, "No address");
         foreach (TSource item in source)
             Console.WriteLine(GetPropertyValue(item));
     }
@@ -32,17 +32,17 @@ internal static class EnumerableExtensions
     /// Imprime uma mensagem no console 
     /// caso a coleção esteja vazia.
     /// </summary>
-    private static void DisplayIfEmpty<TSource>(IEnumerable<TSource> source, string message = "Empty")
+    private static void DisplayIfEmpty<TSource>(IEnumerable<TSource> source, string message)
     {
-        if (!source.Any())
-            Console.WriteLine(message);
+        if (source is null) return;
+        if (!source.Any()) Console.WriteLine(message);
     }
 
     /// <summary>
     /// Retorna o valor de todas
     /// as propriedades não nulas.
     /// </summary>
-    private static StringBuilder GetPropertyValue<T>(T? item)
+    private static StringBuilder GetPropertyValue<T>(T item)
     {
         StringBuilder builder = new();
 
@@ -54,7 +54,7 @@ internal static class EnumerableExtensions
 
         foreach (PropertyInfo property in properties)
         {
-            object? currentValue = property.GetValue(item);
+            object currentValue = property.GetValue(item);
 
             if (currentValue is string value && !string.IsNullOrWhiteSpace(value))
                 builder.AppendLine($"{property.Name}: {value}");
