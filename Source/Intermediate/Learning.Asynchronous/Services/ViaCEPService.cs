@@ -11,7 +11,7 @@ internal sealed class ViaCEPService(HttpClient http) : IDisposable
     /// </summary>
     /// <exception cref="FormatException"></exception>
     /// <exception cref="HttpRequestException"></exception>
-    internal async Task<AddressResponse?> GetAddressAsync(string zipCode, CancellationToken token = default)
+    internal async Task<AddressResponse> GetAddressAsync(string zipCode, CancellationToken token = default)
     {
         ValidateZipCode(zipCode);
 
@@ -19,7 +19,7 @@ internal sealed class ViaCEPService(HttpClient http) : IDisposable
             .GetAsync($"https://viacep.com.br/ws/{zipCode}/json/", token)
             .ConfigureAwait(false);
 
-        AddressResponse? address = await response.Content
+        AddressResponse address = await response.Content
             .ReadFromJsonAsync<AddressResponse>(token)
             .ConfigureAwait(false);
 
